@@ -11,4 +11,8 @@
 5. Import Project as a Maven Project
 6. Run the application 
 
-   $ mvn tomcat6:run
+   $ mvn tomcat6:run  
+
+7. Index some text data into solr core
+
+   http://localhost:8080/deletalldataincoreandindexfromfile

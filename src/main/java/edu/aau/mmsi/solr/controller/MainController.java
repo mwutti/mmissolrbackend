@@ -17,18 +17,12 @@ public class MainController {
     private ProductService productService;
     private ImageResultService imageResultService;
 
-    @RequestMapping("/deletalldataincoreandindexfromfilelol")
+    @RequestMapping("/deletalldataincoreandindexfromfile")
     @ResponseBody
     public void deletalldataincoreandindexfromfilelol() throws IOException {
-        /**
-         * Uncomment the lines to remove all data from solr_core and reindex all data in
-         * /ressources/results/classify_results.txt
-         *
-         *
-         *
-         * imageResultService.deleteAll();
-         + imageResultService.indexFromFile("classify_results.txt");
-         */
+        imageResultService.deleteAll();
+        imageResultService.indexFromFile("classify_results.txt");
+
     }
 
 

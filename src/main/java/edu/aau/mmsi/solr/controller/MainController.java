@@ -4,13 +4,10 @@ import edu.aau.mmsi.solr.service.ImageResultService;
 import edu.aau.mmsi.solr.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Created by Michael on 23.06.2017.
@@ -20,18 +17,20 @@ public class MainController {
     private ProductService productService;
     private ImageResultService imageResultService;
 
-    @RequestMapping("/hello")
-    public String test() throws IOException {
-        System.out.println(productService.findById("1").getName());
-
-        imageResultService.indexFromFile("classify_results.txt");
-        return "test";
+    @RequestMapping("/deletalldataincoreandindexfromfilelol")
+    @ResponseBody
+    public void deletalldataincoreandindexfromfilelol() throws IOException {
+        /**
+         * Uncomment the lines to remove all data from solr_core and reindex all data in
+         * /ressources/results/classify_results.txt
+         *
+         *
+         *
+         * imageResultService.deleteAll();
+         + imageResultService.indexFromFile("classify_results.txt");
+         */
     }
 
-    @GetMapping("/test")
-    public String test1(Map<String, Object> model) {
-        return "test";
-    }
 
     @Autowired
     public void setProductService(ProductService productService) {

@@ -32,6 +32,11 @@ public class ImageResultServiceImpl implements ImageResultService {
     }
 
     @Override
+    public void deleteAll() {
+        imageResultRepository.deleteAll();
+    }
+
+    @Override
     public void indexFromFile(String filename) throws IOException {
         Resource resource = new ClassPathResource("results/" + filename);
         String line;
@@ -57,9 +62,10 @@ public class ImageResultServiceImpl implements ImageResultService {
 
                 i++;
 
-                if (i % 5 == 0) {
+                if (i % 100 == 0) {
                     index(imageResults);
                     imageResults = new ArrayList<>();
+                    System.out.println("i:" + i);
                 }
 
             }

@@ -9,7 +9,9 @@ import java.util.List;
  * Created by Michael on 23.06.2017.
  */
 public interface ImageResultService {
-   void indexFromFile(String filename) throws IOException;
+
+    void indexFromFile(String filename) throws IOException;
     void index(List<ImageResult> results);
     void index(ImageResult result);
+    void deleteAll();
 }

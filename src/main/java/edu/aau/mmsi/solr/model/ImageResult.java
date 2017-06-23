@@ -8,7 +8,7 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 /**
  * Created by Michael on 23.06.2017.
  */
-@SolrDocument(solrCoreName = "core1")
+@SolrDocument(solrCoreName = "core0")
 public class ImageResult implements SearchableImageResultDefinition {
     @Id
     @Indexed
@@ -21,13 +21,13 @@ public class ImageResult implements SearchableImageResultDefinition {
     private String url_o;
 
     @Indexed(LABEL1_FIELD_NAME)
-    String label1;
+    private String label1;
 
-    @Indexed(LABEL1_FIELD_NAME)
-    String label2;
+    @Indexed(LABEL2_FIELD_NAME)
+    private String label2;
 
-    @Indexed(LABEL1_FIELD_NAME)
-    String label3;
+    @Indexed(LABEL3_FIELD_NAME)
+    private String label3;
 
     @Field
     private Double p1;

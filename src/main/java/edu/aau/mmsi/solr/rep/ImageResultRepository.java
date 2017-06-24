@@ -16,4 +16,6 @@ import java.util.Collection;
 public interface ImageResultRepository extends SolrCrudRepository<ImageResult, String> {
 
     Page<ImageResult> findByLabel1In(Collection<String> strings, Pageable pageable);
+
+    Page<ImageResult> findByLabel1Contains(Collection<String> strings, Pageable pageable);
 }

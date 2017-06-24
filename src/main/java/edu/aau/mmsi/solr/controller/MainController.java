@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
@@ -30,9 +31,9 @@ public class MainController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/index")
-    public String showIndexPage() {
+    public String showIndexPage(@RequestParam("q")String searchTerm) {
         PageRequest pageable = new PageRequest(0, 50, new Sort(Sort.Direction.DESC, "p1"));
-        Page<ImageResult> sorted = solrService.findByLabel1In("honeycomb", pageable);
+        Page<ImageResult> sorted = solrService.findByLabel1Contains(searchTerm, pageable);
 
         return "index";
     }

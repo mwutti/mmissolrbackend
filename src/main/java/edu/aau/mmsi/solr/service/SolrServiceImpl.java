@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
@@ -48,6 +49,15 @@ public class SolrServiceImpl implements SolrService {
         }
 
         return imageResultRepository.findByLabel1In(splitSearchTermAndRemoveIgnoredCharacters(searchTerm), pageable);
+    }
+
+    @Override
+    public Page<ImageResult> findByLabel1Contains(String searchTerm, PageRequest pageable) {
+        if (StringUtils.isEmpty(searchTerm)) {
+            return new SolrResultPage<>(Collections.emptyList());
+        }
+
+        return imageResultRepository.findByLabel1Contains(splitSearchTermAndRemoveIgnoredCharacters(searchTerm), pageable);
     }
 
     @Override

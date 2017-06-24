@@ -3,6 +3,7 @@ package edu.aau.mmsi.solr.service;
 import edu.aau.mmsi.solr.model.ImageResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.io.IOException;
 import java.util.List;

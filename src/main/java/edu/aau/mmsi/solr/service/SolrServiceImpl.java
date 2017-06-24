@@ -8,6 +8,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 import org.springframework.stereotype.Component;
 

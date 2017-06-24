@@ -23,13 +23,13 @@ public class ImageResult implements SearchableImageResultDefinition {
     @Indexed(LABEL1_FIELD_NAME)
     private String label1;
 
-    @Indexed(LABEL2_FIELD_NAME)
+    @Field(LABEL2_FIELD_NAME)
     private String label2;
 
-    @Indexed(LABEL3_FIELD_NAME)
+    @Field(LABEL3_FIELD_NAME)
     private String label3;
 
-    @Field
+    @Indexed(P1_FIELD_NAME)
     private Double p1;
 
     @Field

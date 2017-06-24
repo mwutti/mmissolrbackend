@@ -1,9 +1,12 @@
 package edu.aau.mmsi.solr.controller;
 
+import edu.aau.mmsi.solr.model.ImageResult;
 import edu.aau.mmsi.solr.service.SolrService;
 import edu.aau.mmsi.solr.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +31,9 @@ public class MainController {
 
     @RequestMapping(method = RequestMethod.GET, value="/index")
     public String showIndexPage() {
-        solrService.findByLabel1In("cat", new PageRequest(0,50));
+        PageRequest pageable = new PageRequest(0, 50, new Sort(Sort.Direction.DESC, "p1"));
+        Page<ImageResult> sorted = solrService.findByLabel1In("honeycomb", pageable);
+
         return "index";
     }
 

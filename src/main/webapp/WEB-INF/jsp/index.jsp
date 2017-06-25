@@ -22,7 +22,7 @@
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+    <script src="resources/js/jquery.bootpag.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -68,32 +68,50 @@
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
         <h1>Navbar example</h1>
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <c:forEach begin="1" end="${result.totalPages}" var="pageNr">
-                    <li><a href="http://localhost:8080/index?page=${pageNr}">${pageNr}</a></li>
-                </c:forEach>
 
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <c:forEach items="${result.content}" var="image">
-            <img src="${image.url_q}"/>
-        </c:forEach>
+        <div id="content">Dynamic Content goes here</div>
+        <div id="page-selection" data-pages="${result.totalPages}">Pagination goes here</div>
+
+        <div id="resultofPageContainer">
+
+        </div>
     </div>
 
 </div>
 
+<script>
+    $(document).on("ready", function() {
+        var pageSelection = $('#page-selection');
+        var totalpages = pageSelection.attr('data-pages');
 
+
+        <%--pageSelection.bootpag({--%>
+            <%--total: totalPages,--%>
+            <%--maxVisible: 10--%>
+        <%--}).on("page", function(event, num){--%>
+            <%--<c:forEach items="${result.content}" var="image">--%>
+            <%--$("#content").append('<img src="${image.url_q}"/>');--%>
+            <%--</c:forEach>--%>
+        <%--});--%>
+
+        $('#page-selection').bootpag({
+            total: totalpages,
+            page: 1,
+            maxVisible: 10
+        }).on('page', function(event, num){
+            $.ajax({
+                url: "http://localhost:8080/page?page=" + (num - 1) + "&" + "searchTerm=brass"
+            }).done(function( data ) {
+
+                $('#resultofPageContainer').html(data);
+            });
+
+        });
+
+
+    })
+
+</script>
 
 </body>
 </html>

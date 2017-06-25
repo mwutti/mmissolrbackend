@@ -36,6 +36,7 @@ public class MainController {
         return "index";
     }
 
+
     @RequestMapping(method = RequestMethod.GET, value="/result")
     public String showResultPage(Model model, @RequestParam(value = "page", defaultValue = "0") Integer page) {
 //        PageRequest pageable = new PageRequest(0, 50, new Sort(Sort.Direction.DESC, "p1"));
@@ -43,6 +44,12 @@ public class MainController {
         model.addAttribute("result", solrService.findAll(new PageRequest(page, 100)));
         model.addAttribute("page", page);
         return "result";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/page")
+    public String showSinglePage(Model model, @RequestParam("searchTerm") String searchTerm, @RequestParam("page") Integer page) {
+        model.addAttribute("result", solrService.findAll(new PageRequest(page, 100)));
+        return "page";
     }
 
 }

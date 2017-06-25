@@ -61,6 +61,11 @@ public class SolrServiceImpl implements SolrService {
     }
 
     @Override
+    public Page<ImageResult> findAll(Pageable pageable) {
+        return imageResultRepository.findAll(pageable);
+    }
+
+    @Override
     public void indexFromFile(String filename) throws IOException {
         Resource resource = new ClassPathResource("results/" + filename);
         String line;

@@ -1,16 +1,12 @@
 package edu.aau.mmsi.solr.controller;
 
-import edu.aau.mmsi.solr.model.ImageResult;
 import edu.aau.mmsi.solr.service.SolrService;
-import edu.aau.mmsi.solr.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
@@ -20,7 +16,7 @@ import java.io.IOException;
  */
 @Controller
 public class MainController {
-    private ProductService productService;
+    @Autowired
     private SolrService solrService;
 
     @RequestMapping("/deletalldataincoreandindexfromfile")
@@ -31,20 +27,11 @@ public class MainController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/index")
-    public String showIndexPage(@RequestParam("q")String searchTerm) {
-        PageRequest pageable = new PageRequest(0, 50, new Sort(Sort.Direction.DESC, "p1"));
-        Page<ImageResult> sorted = solrService.findByLabel1Contains(searchTerm, pageable);
-
+    public String showIndexPage(Model model) {
+//        PageRequest pageable = new PageRequest(0, 50, new Sort(Sort.Direction.DESC, "p1"));
+//        Page<ImageResult> sorted = solrService.findByLabel1Contains(searchTerm, pageable);
+        model.addAttribute("page", solrService.findAll(new PageRequest(0, 100)));
         return "index";
     }
 
-    @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
-
-    @Autowired
-    public void setSolrService(SolrService solrService) {
-        this.solrService = solrService;
-    }
 }

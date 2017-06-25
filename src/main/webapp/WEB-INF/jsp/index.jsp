@@ -65,6 +65,24 @@
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
         <h1>Navbar example</h1>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <c:forEach begin="1" end="${result.totalPages}" var="pageNr">
+                    <li><a href="http://localhost:8080/index?page=${pageNr}">${pageNr}</a></li>
+                </c:forEach>
+
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
         <c:forEach items="${result.content}" var="image">
             <img src="${image.url_q}"/>
         </c:forEach>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
@@ -27,10 +28,11 @@ public class MainController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/index")
-    public String showIndexPage(Model model) {
+    public String showIndexPage(Model model, @RequestParam(value = "page", defaultValue = "0") Integer page) {
 //        PageRequest pageable = new PageRequest(0, 50, new Sort(Sort.Direction.DESC, "p1"));
 //        Page<ImageResult> sorted = solrService.findByLabel1Contains(searchTerm, pageable);
-        model.addAttribute("result", solrService.findAll(new PageRequest(0, 100)));
+        model.addAttribute("result", solrService.findAll(new PageRequest(page, 100)));
+        model.addAttribute("page", page);
         return "index";
     }
 

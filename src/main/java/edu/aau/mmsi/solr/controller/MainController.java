@@ -30,7 +30,7 @@ public class MainController {
     public String showIndexPage(Model model) {
 //        PageRequest pageable = new PageRequest(0, 50, new Sort(Sort.Direction.DESC, "p1"));
 //        Page<ImageResult> sorted = solrService.findByLabel1Contains(searchTerm, pageable);
-        model.addAttribute("page", solrService.findAll(new PageRequest(0, 100)));
+        model.addAttribute("result", solrService.findAll(new PageRequest(0, 100)));
         return "index";
     }
 

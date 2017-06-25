@@ -69,6 +69,14 @@
     <div class="jumbotron">
         <h1>Navbar example</h1>
 
+        <form id="queryInput" onsubmit="return renderElements()">
+            <div class="form-group">
+                <label for="tag">Enter query terms here:</label>
+                <input type="text" class="form-control" id="tag">
+            </div>
+            <button type="submit" class="btn btn-default">Get Results</button>
+        </form>
+
         <div id="content">Dynamic Content goes here</div>
         <div id="page-selection" data-pages="${result.totalPages}">Pagination goes here</div>
 
@@ -80,9 +88,10 @@
 </div>
 
 <script>
-    $(document).on("ready", function() {
+    function renderElements() {
         var pageSelection = $('#page-selection');
         var totalpages = pageSelection.attr('data-pages');
+        var searchTerm = document.getElementById("tag").value;
 
 
         <%--pageSelection.bootpag({--%>
@@ -100,16 +109,14 @@
             maxVisible: 10
         }).on('page', function(event, num){
             $.ajax({
-                url: "http://localhost:8080/page?page=" + (num - 1) + "&" + "searchTerm=brass"
+                url: "http://localhost:8080/page?page=" + (num - 1) + "&" + "searchTerm=" + searchTerm
             }).done(function( data ) {
 
                 $('#resultofPageContainer').html(data);
             });
-
         });
-
-
-    })
+        return false;
+    }
 
 </script>
 

@@ -39,7 +39,7 @@ public class MainController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/page")
     public String showSinglePage(Model model, @RequestParam("searchTerm") String searchTerm, @RequestParam("page") Integer page) {
-        model.addAttribute("result", solrService.findAll(new PageRequest(page, 100)));
+        model.addAttribute("result", solrService.findByLabel1In(searchTerm,new PageRequest(page, 100)));
         return "page";
     }
 

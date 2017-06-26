@@ -58,4 +58,9 @@ public class MainController {
         return solrService.findImageResultP1Facets();
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/labelOverview")
+    public String getLabelOverview() {
+        return"label_overview";
+    }
+
 }

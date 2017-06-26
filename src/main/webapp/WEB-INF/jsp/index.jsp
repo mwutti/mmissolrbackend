@@ -50,15 +50,22 @@
             border-top-left-radius: 4px;
             border-bottom-left-radius: 4px;
         }
+
         #resultOfPageContainer {
             display: flex;
             flex-wrap: wrap;
         }
-        img {
+
+        .img-preview {
             width: 150px;
             height: 150px;
             margin: auto auto 30px;
             cursor: pointer;
+        }
+
+        #imgmodal {
+            width: 80%;
+            margin:auto;
         }
 
         #page-selection {
@@ -70,12 +77,9 @@
         }
 
         .modal-dialog {
-            width: 800px;
+            width: 80% !important;
         }
 
-        .modal-body {
-            max-height: 800px !important;
-        }
 
 
     </style>
@@ -121,14 +125,14 @@
                             <h2>No results found!</h2>
                         </c:if>
                         <c:forEach items="${result.content}" var="image">
-                            <img src="${image.url_q}" data-image-id="${image.id}" data-image-o="${image.url_o}"/>
+                            <img class="img-preview" src="${image.url_q}" data-image-id="${image.id}" data-image-o="${image.url_o}"/>
 
                             <div class="modal fade" id="imagemodal-${image.id}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                            <img src="" width="1000px" height="500px">
+                                            <img id="imgmodal" src="">
                                         </div>
                                     </div>
                                 </div>

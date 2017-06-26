@@ -24,6 +24,8 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="resources/js/jquery.bootpag.min.js"></script>
+    <script src="resources/js/gridify.min.js"></script>
+
     <style type="text/css">
         .input-group-btn .btn-group {
             display: flex !important;
@@ -48,9 +50,17 @@
             border-top-left-radius: 4px;
             border-bottom-left-radius: 4px;
         }
-        #pagingRow {
-            margin: auto; max-width: 300px;
+        #resultOfPageContainer {
+            display: flex;
+            flex-wrap: wrap;
         }
+        img {
+            width: 150px;
+            height: 150px;
+            margin: auto auto 30px;
+        }
+
+
     </style>
 </head>
 <body>
@@ -89,7 +99,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <div id="resultofPageContainer">
+                    <div id="resultOfPageContainer">
                         <c:if test="${empty result.content}">
                             <h2>No results found!</h2>
                         </c:if>
@@ -120,7 +130,7 @@
                 url: "http://localhost:8080/page?page=" + (num - 1) + "&" + "searchTerm=" + searchTerm
             }).done(function( data ) {
 
-                $('#resultofPageContainer').html(data);
+                $('#resultOfPageContainer').html(data);
             });
         });
     })

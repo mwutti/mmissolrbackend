@@ -61,6 +61,14 @@
             cursor: pointer;
         }
 
+        #imgmodal {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            /*margin: auto auto 30px;*/
+        }
+
         #page-selection {
             margin-top:0px;
         }
@@ -69,12 +77,12 @@
             margin-bottom: 0px;
         }
 
-        .modal-dialog {
-            width: 800px;
-        }
+        /*.modal-dialog {*/
+            /*max-width: 100%;*/
+        /*}*/
 
         .modal-body {
-            max-height: 800px !important;
+            max-height: 80% !important;
         }
 
 
@@ -128,7 +136,7 @@
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                            <img src="" width="1000px" height="500px">
+                                            <img id="imgmodal" src="">
                                         </div>
                                     </div>
                                 </div>

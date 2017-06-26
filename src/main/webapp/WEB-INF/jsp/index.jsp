@@ -24,72 +24,81 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="resources/js/jquery.bootpag.min.js"></script>
+    <style type="text/css">
+        .input-group-btn .btn-group {
+            display: flex !important;
+        }
+        .btn-group .btn {
+            border-radius: 0;
+            margin-left: -1px;
+        }
+        .btn-group .btn:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        .btn-group .form-horizontal .btn[type="submit"] {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        .form-horizontal .form-group {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .form-group .form-control:last-child {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        #pagingRow {
+            margin: auto; max-width: 300px;
+        }
+    </style>
 </head>
 <body>
+
 <div class="container">
-    <!-- Static navbar -->
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Project name</a>
+                <a class="navbar-brand" href="#">Solr Project</a>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-                    <li><a href="../navbar-static-top/">Static top</a></li>
-                    <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
+        </div>
     </nav>
 
-    <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <h1>Navbar example</h1>
+        <div class="container">
+            <form id="queryInput" action="http://localhost:8080/index" method="get">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group" id="adv-search">
+                            <input type="text" class="form-control" placeholder="Search for keyword" name="searchTerm" value="${searchTerm}"/>
+                            <div class="input-group-btn">
+                                <div class="btn-group" role="group">
+                                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
 
-        <form id="queryInput" action="http://localhost:8080/index" method="get">
-            <div class="form-group">
-                <label for="tag">Enter query terms here:</label>
-                <input type="text" class="form-control" id="tag" name="searchTerm" value="${searchTerm}">
+            <div id="pagingRow" class="row">
+                <div class="col-md-12">
+                    <div id="page-selection" data-pages="${result.totalPages}" data-searchTerm="${searchTerm}"></div>
+                </div>
             </div>
-            <button type="submit" class="btn btn-default">Get Results</button>
-        </form>
 
-        <div id="content"></div>
-        <div id="page-selection" data-pages="${result.totalPages}" data-searchTerm="${searchTerm}"></div>
-
-
-        <div id="resultofPageContainer">
-            <c:if test="${empty result.content}">
-                <h2>No results found!</h2>
-            </c:if>
-            <c:forEach items="${result.content}" var="image">
-                <img src="${image.url_q}"/>
-            </c:forEach>
-
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="resultofPageContainer">
+                        <c:if test="${empty result.content}">
+                            <h2>No results found!</h2>
+                        </c:if>
+                        <c:forEach items="${result.content}" var="image">
+                            <img src="${image.url_q}"/>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

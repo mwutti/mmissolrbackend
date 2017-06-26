@@ -60,6 +60,15 @@
             margin: auto auto 30px;
         }
 
+        #page-selection {
+            margin-top:0px;
+        }
+
+        #queryInput {
+            margin-bottom: 0px;
+        }
+
+
 
     </style>
 </head>
@@ -92,7 +101,7 @@
             </form>
 
             <div id="pagingRow" class="row">
-                <div class="col-md-12">
+                <div class="col-md-2 col-md-offset-5">
                     <div id="page-selection" data-pages="${result.totalPages}" data-searchTerm="${searchTerm}"></div>
                 </div>
             </div>
@@ -129,7 +138,6 @@
             $.ajax({
                 url: "http://localhost:8080/page?page=" + (num - 1) + "&" + "searchTerm=" + searchTerm
             }).done(function( data ) {
-
                 $('#resultOfPageContainer').html(data);
             });
         });

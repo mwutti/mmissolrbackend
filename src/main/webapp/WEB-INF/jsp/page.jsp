@@ -11,8 +11,12 @@
 <jsp:useBean id="result" type="org.springframework.data.solr.core.query.result.SolrResultPage<edu.aau.mmsi.solr.model.ImageResult>" scope="request"/>
 
 <div id="page-container">
+    <c:if test="${empty result.content}">
+        <h2>No results found!</h2>
+    </c:if>
     <c:forEach items="${result.content}" var="image">
         <img src="${image.url_q}"/>
     </c:forEach>
+
 </div>
 

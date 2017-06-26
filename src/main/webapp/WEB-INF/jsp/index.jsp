@@ -77,8 +77,8 @@
             <button type="submit" class="btn btn-default">Get Results</button>
         </form>
 
-        <div id="content">Dynamic Content goes here</div>
-        <div id="page-selection" data-pages="${result.totalPages}">Pagination goes here</div>
+        <div id="content"></div>
+        <div id="page-selection" data-pages="${result.totalPages}"></div>
 
         <div id="resultofPageContainer">
 
@@ -94,6 +94,7 @@
         var searchTerm = document.getElementById("tag").value;
 
 
+
         <%--pageSelection.bootpag({--%>
             <%--total: totalPages,--%>
             <%--maxVisible: 10--%>
@@ -102,6 +103,12 @@
             <%--$("#content").append('<img src="${image.url_q}"/>');--%>
             <%--</c:forEach>--%>
         <%--});--%>
+
+        $.ajax({
+            url: "http://localhost:8080/page?page=" + 0 + "&" + "searchTerm=" + searchTerm
+        }).done(function(data) {
+            $('#resultofPageContainer').html(data);
+        })
 
         $('#page-selection').bootpag({
             total: totalpages,
@@ -113,6 +120,7 @@
             }).done(function( data ) {
 
                 $('#resultofPageContainer').html(data);
+                $('#page-selection').bootpag({total: 10, maxVisible: 5});
             });
         });
         return false;

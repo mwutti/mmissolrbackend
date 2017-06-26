@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="result" type="org.springframework.data.solr.core.query.result.SolrResultPage<edu.aau.mmsi.solr.model.ImageResult>" scope="request"/>
+<jsp:useBean id="searchTerm" type="java.lang.String" scope="request"/>
 
 <html>
 <head>
@@ -69,18 +70,25 @@
     <div class="jumbotron">
         <h1>Navbar example</h1>
 
-        <form id="queryInput" onsubmit="return renderElements()">
+        <form id="queryInput" action="http://localhost:8080/index" method="get">
             <div class="form-group">
                 <label for="tag">Enter query terms here:</label>
-                <input type="text" class="form-control" id="tag">
+                <input type="text" class="form-control" id="tag" name="searchTerm" value="${searchTerm}">
             </div>
             <button type="submit" class="btn btn-default">Get Results</button>
         </form>
 
         <div id="content"></div>
-        <div id="page-selection" data-pages="${result.totalPages}"></div>
+        <div id="page-selection" data-pages="${result.totalPages}" data-searchTerm="${searchTerm}"></div>
+
 
         <div id="resultofPageContainer">
+            <c:if test="${empty result.content}">
+                <h2>No results found!</h2>
+            </c:if>
+            <c:forEach items="${result.content}" var="image">
+                <img src="${image.url_q}"/>
+            </c:forEach>
 
         </div>
     </div>
@@ -88,29 +96,13 @@
 </div>
 
 <script>
-    function renderElements() {
+    $(document).on('ready', function () {
+
         var pageSelection = $('#page-selection');
         var totalpages = pageSelection.attr('data-pages');
-        var searchTerm = document.getElementById("tag").value;
+        var searchTerm = pageSelection.attr('data-searchTerm')
 
-
-
-        <%--pageSelection.bootpag({--%>
-            <%--total: totalPages,--%>
-            <%--maxVisible: 10--%>
-        <%--}).on("page", function(event, num){--%>
-            <%--<c:forEach items="${result.content}" var="image">--%>
-            <%--$("#content").append('<img src="${image.url_q}"/>');--%>
-            <%--</c:forEach>--%>
-        <%--});--%>
-
-        $.ajax({
-            url: "http://localhost:8080/page?page=" + 0 + "&" + "searchTerm=" + searchTerm
-        }).done(function(data) {
-            $('#resultofPageContainer').html(data);
-        })
-
-        $('#page-selection').bootpag({
+        pageSelection.bootpag({
             total: totalpages,
             page: 1,
             maxVisible: 10
@@ -120,11 +112,10 @@
             }).done(function( data ) {
 
                 $('#resultofPageContainer').html(data);
-                $('#page-selection').bootpag({total: 10, maxVisible: 5});
             });
         });
-        return false;
-    }
+    })
+
 
 </script>
 

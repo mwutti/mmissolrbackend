@@ -50,11 +50,13 @@
             border-top-left-radius: 4px;
             border-bottom-left-radius: 4px;
         }
+
         #resultOfPageContainer {
             display: flex;
             flex-wrap: wrap;
         }
-        img {
+
+        .img-preview {
             width: 150px;
             height: 150px;
             margin: auto auto 30px;
@@ -62,11 +64,8 @@
         }
 
         #imgmodal {
-            width: auto;
-            height: auto;
-            max-width: 100%;
-            max-height: 100%;
-            /*margin: auto auto 30px;*/
+            width: 80%;
+            margin:auto;
         }
 
         #page-selection {
@@ -77,13 +76,10 @@
             margin-bottom: 0px;
         }
 
-        /*.modal-dialog {*/
-            /*max-width: 100%;*/
-        /*}*/
-
-        .modal-body {
-            max-height: 80% !important;
+        .modal-dialog {
+            width: 80% !important;
         }
+
 
 
     </style>
@@ -129,7 +125,7 @@
                             <h2>No results found!</h2>
                         </c:if>
                         <c:forEach items="${result.content}" var="image">
-                            <img src="${image.url_q}" data-image-id="${image.id}" data-image-o="${image.url_o}"/>
+                            <img class="img-preview" src="${image.url_q}" data-image-id="${image.id}" data-image-o="${image.url_o}"/>
 
                             <div class="modal fade" id="imagemodal-${image.id}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">

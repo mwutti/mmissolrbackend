@@ -59,7 +59,7 @@
         .img-preview {
             width: 150px;
             height: 150px;
-            margin: auto auto 30px;
+            /*margin: auto auto auto auto;*/
             cursor: pointer;
         }
 
@@ -78,6 +78,10 @@
 
         .modal-dialog {
             width: 80% !important;
+        }
+
+        .figcaption-lable1 {
+            margin: auto auto 15px;
         }
 
 
@@ -125,14 +129,19 @@
                             <h2>No results found!</h2>
                         </c:if>
                         <c:forEach items="${result.content}" var="image">
-                            <img class="img-preview" src="${image.url_q}" data-image-id="${image.id}" data-image-o="${image.url_o}"/>
-
-                            <div class="modal fade" id="imagemodal-${image.id}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                            <img id="imgmodal" src="">
+                            <div class="col-xs-2">
+                                <img class="img-preview" src="${image.url_q}" data-image-id="${image.id}" data-image-o="${image.url_o}"/>
+                                <figcaption class="figcaption-lable1">${image.label1}</figcaption>
+                                <div id="${image.id}" data-image-label1="${image.label1}" data-image-label2="${image.label2}" data-image-label3="${image.label3}"
+                                     data-image-p1="${image.p1}" data-image-p2="${image.p2}" data-image-p3="${image.p3}">
+                                </div>
+                                <div class="modal fade" id="imagemodal-${image.id}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                <img id="imgmodal" src="">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

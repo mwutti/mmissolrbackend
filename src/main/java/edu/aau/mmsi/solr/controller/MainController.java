@@ -1,9 +1,13 @@
 package edu.aau.mmsi.solr.controller;
 
+import edu.aau.mmsi.solr.model.ImageResult;
 import edu.aau.mmsi.solr.service.SolrService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.solr.core.query.result.FacetFieldEntry;
+import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Michael on 23.06.2017.
@@ -44,6 +51,11 @@ public class MainController {
     public String showSinglePage(Model model, @RequestParam("searchTerm") String searchTerm, @RequestParam("page") Integer page) {
         model.addAttribute("result", solrService.findByLabel1Contains(searchTerm, new PageRequest(page, PAGE_SIZE,  new Sort(Sort.Direction.DESC, "p1"))));
         return "page";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/labels")
+    @ResponseBody public List<String> getLabelFacets() {
+        return solrService.findImageResultP1Facets();
     }
 
 }

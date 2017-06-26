@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.solr.core.query.result.FacetPage;
 
 import java.io.IOException;
 import java.util.List;
@@ -60,4 +61,6 @@ public interface SolrService {
      * @return All documents
      */
     Page<ImageResult> findAll(Pageable pageable);
+
+    List<String> findImageResultP1Facets();
 }

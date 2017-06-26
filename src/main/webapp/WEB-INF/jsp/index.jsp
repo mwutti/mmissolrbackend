@@ -24,7 +24,7 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="resources/js/jquery.bootpag.min.js"></script>
-    <script src="resources/js/gridify.min.js"></script>
+    <script src="resources/js/typeahead.min.js"></script>
 
     <style type="text/css">
         .input-group-btn .btn-group {
@@ -101,7 +101,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="input-group" id="adv-search">
-                            <input type="text" class="form-control" placeholder="Search for keyword" name="searchTerm" value="${searchTerm}"/>
+                            <input id="querySubmit" type="text" class="form-control" placeholder="Search for keyword" name="searchTerm" value="${searchTerm}" data-provide="typeahead" autocomplete="off"/>
                             <div class="input-group-btn">
                                 <div class="btn-group" role="group">
                                     <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -171,6 +171,13 @@
             modal.modal('show');
             modal.find('img').attr('src', $(this).attr('data-image-o'))
 
+        })
+
+        //Autocompleter js
+        $.ajax({
+            url: "http://localhost:8080/labels"
+        }).done(function(data) {
+            $('#querySubmit').typeahead({source: data})
         })
     })
 

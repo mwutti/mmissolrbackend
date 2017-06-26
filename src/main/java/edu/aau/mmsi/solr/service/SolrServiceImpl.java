@@ -9,7 +9,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.solr.core.query.result.FacetFieldEntry;
+import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 import org.springframework.stereotype.Component;
 
@@ -48,7 +49,7 @@ public class SolrServiceImpl implements SolrService {
             return new SolrResultPage<>(Collections.emptyList());
         }
 
-        return imageResultRepository.findByLabel1In(splitSearchTermAndRemoveIgnoredCharacters(searchTerm), pageable);
+        return imageResultRepository.findByLabel1In(Arrays.asList(searchTerm.split(" ")), pageable);
     }
 
     @Override
@@ -57,12 +58,26 @@ public class SolrServiceImpl implements SolrService {
             return new SolrResultPage<>(Collections.emptyList());
         }
 
-        return imageResultRepository.findByLabel1Contains(splitSearchTermAndRemoveIgnoredCharacters(searchTerm), pageable);
+        return imageResultRepository.findByLabel1Contains(Arrays.asList(searchTerm.split(" ")), pageable);
     }
 
     @Override
     public Page<ImageResult> findAll(Pageable pageable) {
         return imageResultRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<String> findImageResultP1Facets() {
+        List<String> result = new ArrayList<>();
+        FacetPage<ImageResult> facetPage = imageResultRepository.findImageResultP1Facets(new PageRequest(0, 1000));
+
+        List<FacetFieldEntry> facetFieldEntries = facetPage.getFacetResultPage("l1").getContent();
+
+        for(FacetFieldEntry entry : facetFieldEntries) {
+            result.add(entry.getValue());
+        }
+
+        return result;
     }
 
     @Override
@@ -107,16 +122,5 @@ public class SolrServiceImpl implements SolrService {
     @Autowired
     public void setImageResultRepository(ImageResultRepository imageResultRepository) {
         this.imageResultRepository = imageResultRepository;
-    }
-
-    private Collection<String> splitSearchTermAndRemoveIgnoredCharacters(String searchTerm) {
-        String[] searchTerms = StringUtils.split(searchTerm, " ");
-        List<String> result = new ArrayList<String>(searchTerms.length);
-        for (String term : searchTerms) {
-            if (StringUtils.isNotEmpty(term)) {
-                result.add(IGNORED_CHARS_PATTERN.matcher(term).replaceAll(" "));
-            }
-        }
-        return result;
     }
 }

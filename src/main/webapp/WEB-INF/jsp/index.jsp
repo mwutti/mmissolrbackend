@@ -80,6 +80,10 @@
             width: 80% !important;
         }
 
+        .figcaption-lable1 {
+            margin: auto auto 15px;
+        }
+
 
 
     </style>
@@ -127,7 +131,7 @@
                         <c:forEach items="${result.content}" var="image">
                             <div class="col-xs-2">
                                 <img class="img-preview" src="${image.url_q}" data-image-id="${image.id}" data-image-o="${image.url_o}"/>
-                                <figcaption>${image.label1}</figcaption>
+                                <figcaption class="figcaption-lable1">${image.label1}</figcaption>
                                 <div id="${image.id}" data-image-label1="${image.label1}" data-image-label2="${image.label2}" data-image-label3="${image.label3}"
                                      data-image-p1="${image.p1}" data-image-p2="${image.p2}" data-image-p3="${image.p3}">
                                 </div>

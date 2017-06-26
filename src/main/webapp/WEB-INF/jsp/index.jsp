@@ -58,6 +58,7 @@
             width: 150px;
             height: 150px;
             margin: auto auto 30px;
+            cursor: pointer;
         }
 
         #page-selection {
@@ -68,6 +69,13 @@
             margin-bottom: 0px;
         }
 
+        .modal-dialog {
+            width: 800px;
+        }
+
+        .modal-body {
+            max-height: 800px !important;
+        }
 
 
     </style>
@@ -101,7 +109,7 @@
             </form>
 
             <div id="pagingRow" class="row">
-                <div class="col-md-2 col-md-offset-5">
+                <div class="col-md-6 col-md-offset-3">
                     <div id="page-selection" data-pages="${result.totalPages}" data-searchTerm="${searchTerm}"></div>
                 </div>
             </div>
@@ -113,7 +121,18 @@
                             <h2>No results found!</h2>
                         </c:if>
                         <c:forEach items="${result.content}" var="image">
-                            <img src="${image.url_q}"/>
+                            <img src="${image.url_q}" data-image-id="${image.id}" data-image-o="${image.url_o}"/>
+
+                            <div class="modal fade" id="imagemodal-${image.id}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <img src="" width="1000px" height="500px">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </c:forEach>
                     </div>
                 </div>
@@ -141,6 +160,14 @@
                 $('#resultOfPageContainer').html(data);
             });
         });
+
+        $('img').on('click', function(event) {
+            var image_id = $(this).attr('data-image-id');
+            var modal = $('#imagemodal-' + image_id);
+            modal.modal('show');
+            modal.find('img').attr('src', $(this).attr('data-image-o'))
+
+        })
     })
 
 

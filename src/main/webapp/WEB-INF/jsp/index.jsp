@@ -148,7 +148,6 @@
 
 <script>
     $(document).on('ready', function () {
-
         var pageSelection = $('#page-selection');
         var totalpages = pageSelection.attr('data-pages');
         var searchTerm = pageSelection.attr('data-searchTerm')
@@ -161,7 +160,15 @@
             $.ajax({
                 url: "http://localhost:8080/page?page=" + (num - 1) + "&" + "searchTerm=" + searchTerm
             }).done(function( data ) {
-                $('#resultOfPageContainer').html(data);
+                var $resultOfPageContainer = $('#resultOfPageContainer');
+                $resultOfPageContainer.html(data);
+                $resultOfPageContainer.find('img').on('click', function(event) {
+                    debugger;
+                    var image_id = $(this).attr('data-image-id');
+                    var modal = $('#imagemodal-' + image_id);
+                    modal.modal('show');
+                    modal.find('img').attr('src', $(this).attr('data-image-o'))
+                })
             });
         });
 
@@ -171,7 +178,7 @@
             modal.modal('show');
             modal.find('img').attr('src', $(this).attr('data-image-o'))
 
-        })
+        });
 
         //Autocompleter js
         $.ajax({

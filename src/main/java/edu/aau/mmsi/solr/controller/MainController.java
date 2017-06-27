@@ -37,7 +37,7 @@ public class MainController {
 
         model.addAttribute("page", page);
         model.addAttribute("searchTerm", searchTerm);
-        return "index";
+        return "index_neu";
     }
 
 
@@ -59,7 +59,7 @@ public class MainController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/presentation")
     public String getPresentation() {
-        return "labels";
+        return "presentation";
     }
 
 }

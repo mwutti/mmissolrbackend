@@ -9,6 +9,7 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Michael on 23.06.2017.
@@ -63,4 +64,7 @@ public interface SolrService {
     Page<ImageResult> findAll(Pageable pageable);
 
     List<String> findImageResultP1Facets();
+
+    List<Map<String,Long>> getLabelData();
+
 }

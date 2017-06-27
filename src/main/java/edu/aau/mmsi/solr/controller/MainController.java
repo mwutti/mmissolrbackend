@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Michael on 23.06.2017.
@@ -48,7 +50,8 @@ public class MainController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/labels")
-    @ResponseBody public List<String> getLabelFacets() {
+    @ResponseBody
+    public List<String> getLabelFacets() {
         return solrService.findImageResultP1Facets();
     }
 
@@ -60,6 +63,12 @@ public class MainController {
     @RequestMapping(method = RequestMethod.GET, value = "/presentation")
     public String getPresentation() {
         return "presentation";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/label-data")
+    @ResponseBody
+    public List<Map<String,Long>> getLabelData() {
+        return solrService.getLabelData();
     }
 
 }

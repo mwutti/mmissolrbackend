@@ -77,6 +77,28 @@ public class SolrServiceImpl implements SolrService {
             result.add(entry.getValue());
         }
 
+
+        return result;
+    }
+
+    @Override
+    public List<Map<String, Long>> getLabelData() {
+        List<Map<String, Long>> result = new ArrayList<>();
+        FacetPage<ImageResult> facetPage = imageResultRepository.findImageResultP1Facets(new PageRequest(0, 1000));
+
+        List<FacetFieldEntry> facetFieldEntries = facetPage.getFacetResultPage("l1").getContent();
+
+        Map<String, Long> totalCount = new HashMap<>();
+        totalCount.put("count", facetPage.getTotalElements());
+        result.add(totalCount);
+
+        Map<String, Long> termVector = new HashMap<>();
+        for(FacetFieldEntry entry : facetFieldEntries) {
+            termVector.put(entry.getValue(), entry.getValueCount());
+        }
+
+        result.add(sortByValue(termVector));
+
         return result;
     }
 
@@ -122,5 +144,23 @@ public class SolrServiceImpl implements SolrService {
     @Autowired
     public void setImageResultRepository(ImageResultRepository imageResultRepository) {
         this.imageResultRepository = imageResultRepository;
+    }
+
+    private static <K, V> Map<K, V> sortByValue(Map<K, V> map) {
+        List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
+        Collections.sort(list, new Comparator<Object>() {
+            @SuppressWarnings("unchecked")
+            public int compare(Object o1, Object o2) {
+                return ((Comparable<V>) ((Map.Entry<K, V>) (o1)).getValue()).compareTo(((Map.Entry<K, V>) (o2)).getValue());
+            }
+        });
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Iterator<Map.Entry<K, V>> it = list.iterator(); it.hasNext();) {
+            Map.Entry<K, V> entry = (Map.Entry<K, V>) it.next();
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
     }
 }

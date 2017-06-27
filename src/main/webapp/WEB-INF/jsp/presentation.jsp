@@ -162,6 +162,7 @@
                 <p>By <a href="http://kaiminghe.com">Kaiming He</a>,<a href="https://scholar.google.com/citations?user=yuB-cfoAAAAJ&amp;hl=en">Xiangyu Zhang</a>,
                     <a href="http://home.ustc.edu.cn/%7Esqren/">Shaoqing Ren</a>, <a href="http://research.microsoft.com/en-us/people/jiansun/">Jian Sun</a>.
                     Microsoft Research Asia (MSRA).</p>
+                <btn id="btn-labels" class="btn btn-primary btl-large" style="margin-bottom: 30px">Label Distribution</btn>
                 <div id="labels">
 
                 </div>
@@ -169,6 +170,48 @@
         </div>
     </div>
 </section>
+
+<div id="prototype" class="progress" hidden>
+    <div class="progress-bar" role="progressbar" aria-valuenow="70"
+         aria-valuemin="0" aria-valuemax="100" style="color: #000000;">
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).on('ready', function() {
+        $('#btn-labels').on('click', function() {
+            $.ajax({
+                url: "http://localhost:8080/label-data"
+            }).done(function(data) {
+                var totalCount = data[0]['count'];
+                var termVector = data[1];
+                var proto= $('#prototype');
+                var labelSection = $('#labels')
+
+                var cdv = 0;
+                $.each(termVector, function(elem, index) {
+                    console.log(index + " " + elem );
+                    debugger;
+                    var percentage = index / totalCount * 100;
+                    cdv = cdv + percentage;
+
+
+                    var progress = proto.clone();
+                    progress.attr('hidden', false);
+
+                    var progressbar = progress.find('.progress-bar');
+                    progressbar.attr('aria-valuenow', cdv);
+                    progressbar.css('width', cdv + "%")
+                    progressbar.html(elem + " , #" + index + ", "+ percentage + "%");
+
+                    progress.prependTo(labelSection)
+                })
+
+            })
+        })
+    })
+</script>
 
 </body>
 

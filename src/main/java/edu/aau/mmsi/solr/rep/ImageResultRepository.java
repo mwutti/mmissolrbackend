@@ -22,6 +22,6 @@ public interface ImageResultRepository extends SolrCrudRepository<ImageResult, S
     Page<ImageResult> findByLabel1Contains(Collection<String> strings, Pageable pageable);
 
     @Query(value = "*:*")
-    @Facet(fields = SearchableImageResultDefinition.LABEL1_FIELD_NAME, limit = 5000)
+    @Facet(fields = SearchableImageResultDefinition.LABEL1_FIELD_NAME, limit = 1000)
     FacetPage<ImageResult> findImageResultP1Facets(Pageable pageable);
 }

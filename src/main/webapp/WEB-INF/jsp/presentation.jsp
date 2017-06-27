@@ -2,15 +2,13 @@
   Created by IntelliJ IDEA.
   User: michael
   Date: 26/06/2017
-  Time: 19:58
+  Time: 21:53
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
 <html>
 <head>
-    <title>Label overview</title>
+    <title>Presentation</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Optional theme -->
@@ -20,7 +18,6 @@
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
 </head>
 <body>
 <div class="container">
@@ -35,10 +32,9 @@
             </ul>
         </div>
     </nav>
-
-    <div class="jumbotron">
-
-    </div>
+</div>
+<div class="container">
+    <img src="http://localhost:8080/technologies.png"/>
 </div>
 
 </body>

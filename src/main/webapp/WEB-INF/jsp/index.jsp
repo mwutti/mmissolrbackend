@@ -89,10 +89,6 @@
             margin: auto auto 15px;
             width: 80%;
         }
-
-
-
-
     </style>
 </head>
 <body>
@@ -101,31 +97,18 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Solr Project</a>
+                <a class="navbar-brand" href="http://localhost:8080">Solr Project</a>
             </div>
             <ul class="nav navbar-nav">
+                <li class=""><a href="http://localhost:8080/presentation    ">Presentation</a></li>
                 <li class=""><a href="http://localhost:8080/labelOverview">Labels</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
             </ul>
         </div>
     </nav>
 
     <div class="jumbotron">
         <div class="container">
-            <form id="queryInput" action="http://localhost:8080/index" method="get">
+            <form id="queryInput" action="http://localhost:8080/" method="get">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="input-group" id="adv-search">

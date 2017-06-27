@@ -1,13 +1,9 @@
 package edu.aau.mmsi.solr.controller;
 
-import edu.aau.mmsi.solr.model.ImageResult;
 import edu.aau.mmsi.solr.service.SolrService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.solr.core.query.result.FacetFieldEntry;
-import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -36,7 +30,7 @@ public class MainController {
         solrService.indexFromFile("classify_results.txt");
     }
 
-    @RequestMapping(method = RequestMethod.GET, value="/index")
+    @RequestMapping(method = RequestMethod.GET, value={"/", ""})
     public String showIndexPage(Model model, @RequestParam(value="searchTerm", required = false, defaultValue = "lake") String searchTerm,
                                 @RequestParam(value = "page", defaultValue = "0") Integer page) {
         model.addAttribute("result", solrService.findByLabel1Contains(searchTerm, new PageRequest(page, PAGE_SIZE, new Sort(Sort.Direction.DESC, "p1"))));
@@ -61,6 +55,11 @@ public class MainController {
     @RequestMapping(method = RequestMethod.GET, value = "/labelOverview")
     public String getLabelOverview() {
         return"label_overview";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/presentation")
+    public String getPresentation() {
+        return "labels";
     }
 
 }

@@ -4,8 +4,6 @@ import edu.aau.mmsi.solr.model.ImageResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.solr.core.query.result.FacetPage;
 
 import java.io.IOException;
 import java.util.List;

@@ -4,7 +4,6 @@ import edu.aau.mmsi.solr.model.ImageResult;
 import edu.aau.mmsi.solr.model.SearchableImageResultDefinition;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.repository.Facet;
 import org.springframework.data.solr.repository.Query;

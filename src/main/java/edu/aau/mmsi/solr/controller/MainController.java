@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,12 +35,10 @@ public class MainController {
     public String showIndexPage(Model model, @RequestParam(value="searchTerm", required = false, defaultValue = "lake") String searchTerm,
                                 @RequestParam(value = "page", defaultValue = "0") Integer page) {
         model.addAttribute("result", solrService.findByLabel1Contains(searchTerm, new PageRequest(page, PAGE_SIZE, new Sort(Sort.Direction.DESC, "p1"))));
-
         model.addAttribute("page", page);
         model.addAttribute("searchTerm", searchTerm);
-        return "index_neu";
+        return "index";
     }
-
 
     @RequestMapping(method = RequestMethod.GET, value = "/page")
     public String showSinglePage(Model model, @RequestParam("searchTerm") String searchTerm, @RequestParam("page") Integer page) {
@@ -55,11 +52,6 @@ public class MainController {
         return solrService.findImageResultP1Facets();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/labelOverview")
-    public String getLabelOverview() {
-        return"label_overview";
-    }
-
     @RequestMapping(method = RequestMethod.GET, value = "/presentation")
     public String getPresentation() {
         return "presentation";
@@ -70,5 +62,4 @@ public class MainController {
     public List<Map<String,Long>> getLabelData() {
         return solrService.getLabelData();
     }
-
 }

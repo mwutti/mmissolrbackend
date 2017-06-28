@@ -36,15 +36,7 @@
                 -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
                 transition: background .5s ease-in-out,padding .5s ease-in-out;
             }
-
-            .top-nav-collapse {
-                padding: 0;
-            }
         }
-
-        /* Demo Sections - You can use these as guides or delete them - the scroller will work with any sort of height, fixed, undefined, or percentage based.
-        The padding is very important to make sure the scrollspy picks up the right area when scrolled to. Adjust the margin and padding of sections and children
-        of those sections to manage the look and feel of the site. */
 
         .tech-section {
             height: 100%;
@@ -66,16 +58,6 @@
             text-align: center;
             background: #fff;
         }
-
-        .contact-section {
-            height: 100%;
-            padding-top: 150px;
-            text-align: center;
-            background: #eee;
-        }
-
-
-
     </style>
 
     <!-- Latest compiled and minified JavaScript -->
@@ -102,11 +84,8 @@
 
 </head>
 
-<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
-
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-<!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header page-scroll">
@@ -125,12 +104,9 @@
             <li class="page-scroll"><a href="#proc">Process</a></li>
             <li class="page-scroll"><a href="#res">ResNet-50</a></li>
         </ul>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container -->
 </nav>
 
-<!-- Intro Section -->
 <section id="tech" class="tech-section">
     <div class="container">
         <div class="row">

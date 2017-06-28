@@ -18,14 +18,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * Created by Michael on 23.06.2017.
  */
 @Component
 public class SolrServiceImpl implements SolrService {
-    private static final Pattern IGNORED_CHARS_PATTERN = Pattern.compile("\\p{Punct}");
     private ImageResultRepository imageResultRepository;
 
     @Override

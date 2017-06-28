@@ -17,3 +17,5 @@
 7. Index some test data into solr core
 
    http://localhost:8080/deletalldataincoreandindexfromfile
+
+![Screenshot](https://github.com/mwutti/mmissolrbackend/blob/master/screenshot_solr_project.jpg "Solr Project")
